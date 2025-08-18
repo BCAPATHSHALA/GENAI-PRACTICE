@@ -2,6 +2,8 @@ import "dotenv/config";
 import { OpenAI } from "openai";
 import axios from "axios";
 
+import { exec } from "child_process";
+
 // Tool 1: fetch real time weather based on city name
 async function getWeatherDetailsByCity(cityname = "") {
   const url = `https://wttr.in/${cityname.toLowerCase()}?format=%C+%t`;
@@ -9,9 +11,23 @@ async function getWeatherDetailsByCity(cityname = "") {
   return `The current weather of ${cityname} is ${data}`;
 }
 
+// Tool 2: execute the linux/bash command on localhost
+async function executeCommand(cmd = "") {
+  return new Promise((res, rej) => {
+    exec(cmd, (error, data) => {
+      if (error) {
+        return res(`Error running command ${error}`);
+      } else {
+        res(data);
+      }
+    });
+  });
+}
+
 // We stores the all tools for calling by ai
 const TOOL_MAP = {
   getWeatherDetailsByCity: getWeatherDetailsByCity,
+  executeCommand: executeCommand,
 };
 
 const client = new OpenAI();
@@ -31,6 +47,7 @@ async function main() {
 
     Available Tools:
     - getWeatherDetailsByCity(cityname: string): Returns the current weather data of the city.
+    - executeCommand(command: string): Takes a linux / unix command as arg and executes the command on user's machine and returns the output
 
     Rules:
     - Strictly follow the output JSON format
@@ -61,7 +78,10 @@ async function main() {
     },
     {
       role: "user",
-      content: "what is the current weather of delhi?",
+      // content: "what is the current weather of delhi?",
+      // content: "create the folder name todoapp and create three files index.html, style.css, and script.js for building the todo application.",
+      content:
+        "In the current directly, read the changes via git and push the changes to github with good commit message",
     },
   ];
 
@@ -169,5 +189,35 @@ PS E:\DEV ECOSYSTEM\GENAI PROJECTS\genai practice> node agents.js
   content: 'The current weather in Delhi is misty with a temperature of 28°C.'
 }
 🤖 The current weather in Delhi is misty with a temperature of 28°C.
+Done...
+
+
+
+
+PS E:\DEV ECOSYSTEM\GENAI PROJECTS\genai practice> node agents.js
+{
+  step: 'START',
+  content: 'The user wants to create a project folder for a todo application with specific files inside.'
+}
+🔥 The user wants to create a project folder for a todo application with specific files inside.
+{
+  step: 'THINK',
+  content: "I need to create a directory named 'todoapp' and then create three files inside it: index.html, style.css, and script.js."
+}
+        🧠 I need to create a directory named 'todoapp' and then create three files inside it: index.html, style.css, and script.js.
+{
+  step: 'TOOL',
+  input: 'mkdir todoapp && cd todoapp && touch index.html style.css script.js',
+  tool_name: 'executeCommand'
+}
+🛠️: executeCommand(mkdir todoapp && cd todoapp && touch index.html style.css script.js) =  Error running command Error: Command failed: mkdir todoapp && cd todoapp && touch index.html style.css script.js
+'touch' is not recognized as an internal or external command,
+operable program or batch file.
+
+{
+  step: 'OUTPUT',
+  content: "The command to create the folder and files failed because 'touch' is not recognized. I will adapt the commands for Windows environment by creating files manually after creating the folder."
+}
+🤖 The command to create the folder and files failed because 'touch' is not recognized. I will adapt the commands for Windows environment by creating files manually after creating the folder.
 Done...
 */
