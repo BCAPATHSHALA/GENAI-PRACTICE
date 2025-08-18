@@ -24,10 +24,29 @@ async function executeCommand(cmd = "") {
   });
 }
 
+// Tool 3: get github user details via inputing the username
+async function getGithubUserInfoByUsername(username = "") {
+  const url = `https://api.github.com/users/${username.toLowerCase()}`;
+  const { data } = await axios.get(url);
+  return JSON.stringify({
+    login: data.login,
+    id: data.id,
+    name: data.name,
+    location: data.location,
+    twitter_username: data.twitter_username,
+    public_repos: data.public_repos,
+    public_gists: data.public_gists,
+    user_view_type: data.user_view_type,
+    followers: data.followers,
+    following: data.following,
+  });
+}
+
 // We stores the all tools for calling by ai
 const TOOL_MAP = {
   getWeatherDetailsByCity: getWeatherDetailsByCity,
   executeCommand: executeCommand,
+  getGithubUserInfoByUsername: getGithubUserInfoByUsername,
 };
 
 const client = new OpenAI();
@@ -48,6 +67,7 @@ async function main() {
     Available Tools:
     - getWeatherDetailsByCity(cityname: string): Returns the current weather data of the city.
     - executeCommand(command: string): Takes a linux / unix command as arg and executes the command on user's machine and returns the output
+    - getGithubUserInfoByUsername(username: string): Retuns the public info about the github user using github api
 
     Rules:
     - Strictly follow the output JSON format
@@ -82,6 +102,7 @@ async function main() {
       // content: "create the folder name todoapp and create three files index.html, style.css, and script.js for building the todo application.",
       content:
         "In the current directly, read the changes via git and push the changes to github with good commit message",
+      // content: "i want the get the public information of this username BCAPATHSHALA of github"
     },
   ];
 
@@ -219,5 +240,32 @@ operable program or batch file.
   content: "The command to create the folder and files failed because 'touch' is not recognized. I will adapt the commands for Windows environment by creating files manually after creating the folder."
 }
 🤖 The command to create the folder and files failed because 'touch' is not recognized. I will adapt the commands for Windows environment by creating files manually after creating the folder.
+Done...
+
+
+MANOJ NISHAD@DESKTOP-6HML177 MINGW64 /e/DEV ECOSYSTEM/GENAI PROJECTS/genai practice (main)
+$ node agents.js
+{
+  step: 'START',
+  content: 'The user wants to get public information of the GitHub user with username BCAPATHSHALA.'
+}
+� The user wants to get public information of the GitHub user with username BCAPATHSHALA.
+{
+  step: 'THINK',
+  content: 'I need to check if the username BCAPATHSHALA is valid and exists on GitHub. If it does, I can use the getGithubUserInfoByUsername tool to fetch the information.'
+}
+        � I need to check if the username BCAPATHSHALA is valid and exists on GitHub. If it does, I can use the getGithubUserInfoByUsername tool to fetch the information.
+{
+  step: 'TOOL',
+  input: 'BCAPATHSHALA',
+  tool_name: 'getGithubUserInfoByUsername'
+}
+�️: getGithubUserInfoByUsername(BCAPATHSHALA) =  {"login":"BCAPATHSHALA","id":109135089,"name":"MANOJ KUMAR","location":"UP, India","twitter_username":"manojofficialmj","public_repos":77,"public_gists":0,"user_view_type":"public","followe
+rs":192,"following":16}
+{
+  step: 'OUTPUT',
+  content: 'The public GitHub profile for BCAPATHSHALA belongs to MANOJ KUMAR. He is based in UP, India, with 77 public repositories and 192 followers. His Twitter handle is @manojofficialmj.'
+}
+� The public GitHub profile for BCAPATHSHALA belongs to MANOJ KUMAR. He is based in UP, India, with 77 public repositories and 192 followers. His Twitter handle is @manojofficialmj.
 Done...
 */
