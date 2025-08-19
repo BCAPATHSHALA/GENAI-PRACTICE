@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { OpenAI } from "openai";
+import { OpenAIEmbeddings } from "@langchain/openai";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -17,6 +18,14 @@ const main = async () => {
       { role: "system", content: SYSTEM_PROMPT },
       { role: "user", content: userQuery },
     ];
+
+    // Step 7: create vector embedding for for user query
+    const embeddings = new OpenAIEmbeddings({
+      apiKey: process.env.OPENAI_API_KEY,
+      model: "text-embedding-3-large",
+    });
+
+
     const response = await openai.chat.completions.create({
       model: "gpt-4.1-nano",
       messages: messagesHistory,
