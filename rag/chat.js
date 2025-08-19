@@ -38,7 +38,7 @@ const main = async () => {
     
     Context: ${JSON.stringify(relevantChunks)}`;
 
-    // 10: pass relevant data & user input query to chat LLM(s) to get the relevant answere
+    // Step 10: pass relevant data & user input query to chat LLM(s) to get the relevant answere
     const messagesHistory = [
       { role: "system", content: SYSTEM_PROMPT },
       { role: "user", content: userQuery },
@@ -48,6 +48,8 @@ const main = async () => {
       messages: messagesHistory,
     });
 
+    // Step 11: user get the final output through chat LLM
+    console.log("Response:", response.choices[0].message.content);
   } catch (error) {
     console.log(`Reterival chat phase error: ${err}`);
   }
