@@ -32,15 +32,17 @@ const main = async () => {
       }
     );
 
+    // Step 9: retrieve relevant chunks from top 3 most relevant chunks for any query
+    const vectorRetriver = vectorStore.asRetriever({
+      k: 3,
+    });
+    const relevantChunks = await vectorRetriver.invoke(userQuery);
+
     // Step 6: user input query
     const SYSTEM_PROMPT = `You are an AI assistant that answers questions based on the provided context available to you from a PDF file with the content and page number. Only answer based on the available context from file.
     
-    Context: .............`;
-    const response = await openai.chat.completions.create({
-      model: "gpt-4.1-nano",
-      messages: messagesHistory,
-    });
-    console.log("Response:", response.choices[0].message.content);
+    Context: ${JSON.stringify(relevantChunks)}`;
+    
   } catch (error) {
     console.log(`Reterival chat phase error: ${err}`);
   }
