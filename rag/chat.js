@@ -10,7 +10,7 @@ const openai = new OpenAI({
 const main = async () => {
   try {
     const userQuery =
-      "please, can you tell me about the hosting concept in node.js";
+      "please, can you tell me about the MongoDB hosting is what and why use?";
 
     // Step 7: create vector embedding for for user query
     const embeddings = new OpenAIEmbeddings({
@@ -56,3 +56,24 @@ const main = async () => {
 };
 
 main();
+
+/*
+const userQuery =
+      "please, can you tell me about the hosting concept in node.js";
+Response: The provided document does not contain information specifically about the hosting concept in Node.js.
+
+-----------------------------
+
+const userQuery =
+      "please, can you tell me about the MongoDB hosting is what and why use?";
+Response: Based on the provided content, MongoDB hosting refers to deploying and managing your MongoDB database on a dedicated platform or service. One example mentioned is MongoDB Atlas, which is the official managed hosting platform for MongoDB released by the MongoDB organization. It allows you to set up a production-ready MongoDB database without the need to manage the underlying infrastructure yourself.
+
+Why use MongoDB hosting?
+- It simplifies the deployment process and reduces administrative overhead.
+- Ensures reliable and secure data storage.
+- Provides scalable options to handle increasing data and traffic.
+- Offers features like automatic backups, updates, and monitoring.
+- Facilitates easier deployment and management of your database in production environments.
+
+Using a managed hosting platform like MongoDB Atlas is especially beneficial for scaling applications, ensuring uptime, and focusing on development rather than infrastructure management.
+*/
