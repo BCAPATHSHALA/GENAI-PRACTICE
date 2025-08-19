@@ -28,7 +28,6 @@ const main = async () => {
     const vectorData = await embeddings.embedDocuments(
       chunks.map((chunk) => chunk.pageContent)
     );
-
     console.log("Total embeddings generated:", vectorData.length);
     console.log("Embedding for first chunk:", vectorData[0]);
   } catch (err) {
