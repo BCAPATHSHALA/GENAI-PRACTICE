@@ -2,6 +2,7 @@ import "dotenv/config";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { OpenAIEmbeddings } from "@langchain/openai";
+import { QdrantVectorStore } from "@langchain/qdrant";
 
 const main = async () => {
   try {
@@ -30,6 +31,18 @@ const main = async () => {
     );
     console.log("Total embeddings generated:", vectorData.length);
     console.log("Embedding for first chunk:", vectorData[0]);
+
+    // Step 5: store documents(chunks) + embeddings inside vector DB Qdrant
+    const vectorStore = await QdrantVectorStore.fromDocuments(
+      chunks,
+      embeddings,
+      {
+        url: "http://localhost:6333",
+        collectionName: "notebookllm",
+      }
+    );
+
+    console.log("Data successfully indexed into Qdrant...");
   } catch (err) {
     console.log(`Indexing error: ${err}`);
   }
