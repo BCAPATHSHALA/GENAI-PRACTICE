@@ -12,11 +12,6 @@ const main = async () => {
     const userQuery =
       "please, can you tell me about the hosting concept in node.js";
 
-    const messagesHistory = [
-      { role: "system", content: SYSTEM_PROMPT },
-      { role: "user", content: userQuery },
-    ];
-
     // Step 7: create vector embedding for for user query
     const embeddings = new OpenAIEmbeddings({
       apiKey: process.env.OPENAI_API_KEY,
@@ -42,7 +37,17 @@ const main = async () => {
     const SYSTEM_PROMPT = `You are an AI assistant that answers questions based on the provided context available to you from a PDF file with the content and page number. Only answer based on the available context from file.
     
     Context: ${JSON.stringify(relevantChunks)}`;
-    
+
+    // 10: pass relevant data & user input query to chat LLM(s) to get the relevant answere
+    const messagesHistory = [
+      { role: "system", content: SYSTEM_PROMPT },
+      { role: "user", content: userQuery },
+    ];
+    const response = await openai.chat.completions.create({
+      model: "gpt-4.1-nano",
+      messages: messagesHistory,
+    });
+
   } catch (error) {
     console.log(`Reterival chat phase error: ${err}`);
   }
