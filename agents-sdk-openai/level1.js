@@ -62,7 +62,7 @@ const getMenuTool = tool({
 });
 
 // Create the cooking agent
-const cookingAgent = new Agent({
+export const cookingAgent = new Agent({
   name: "Cooking Agent",
   model: "gpt-4.1-mini",
   tools: [getCurrentTimeTool, getMenuTool],
@@ -98,9 +98,9 @@ const chatWithCookingAgent = async (query) => {
 };
 
 // Example usage
-chatWithCookingAgent(
-  "In Restaurant B, what is good to eat and drink based on current time?"
-);
+// chatWithCookingAgent(
+//   "In Restaurant B, what is good to eat and drink based on current time?"
+// );
 
 /*
 Query Examples: Depending on the current time, suggest a meal I can cook right now.
