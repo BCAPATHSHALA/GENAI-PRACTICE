@@ -1,43 +1,73 @@
 import "dotenv/config";
-import { Agent, run } from "@openai/agents";
+import { Agent, Runner } from "@openai/agents";
+import chalk from "chalk";
 
+// Create a simple storytelling agent
 const agent = new Agent({
   name: "Storyteller",
   instructions:
     "You are a storyteller. You will be given a topic and you will tell a story about it.",
 });
 
-const result = await run(agent, "Tell me a story about a cat.", {
-  stream: true,
+// Create a runner to run the agent
+const runner = new Runner({
+  model: "gpt-4o-mini",
 });
 
-result
-  .toTextStream({
-    compatibleWithNodeStreams: true,
-  })
-  .pipe(process.stdout);
+// Main function to run the agent with streaming enabled
+const init = async () => {
+  console.log(chalk.bgCyan("  ● Text only stream  \n"));
+
+  // Run the agent with streaming enabled
+  const storytellerStream = await runner.run(
+    agent,
+    "Tell me a story about a manoj nishad (he is a software engineer).",
+    {
+      stream: true, // Enable streaming
+    }
+  );
+
+  // If you only care about the text you can use the transformed textStream
+  storytellerStream
+    .toTextStream({
+      compatibleWithNodeStreams: true,
+    })
+    .pipe(process.stdout);
+
+  // waiting to make sure that we are done with handling the stream
+  await storytellerStream.completed;
+
+  console.log(chalk.bgCyan("\n\n  ● All event stream  \n"));
+};
+
+init();
 
 /*
-  PS E:\DEV ECOSYSTEM\GENAI PROJECTS\genai practice\agents-sdk-openai> node streamtext.js
-Of course! Here’s a story about a clever little cat:
+  ● Text only stream  
 
----
+Once upon a time in the bustling city of Bangalore, there lived a software engineer named Manoj Nishad. With his unkempt hair and a collection of quirky T-shirts, Manoj was known as much for his technical prowess as he was for his delightful sense of humor. Day in and day out, he immersed himself in lines of code, transforming complex challenges into elegant solutions. However, amid the virtual world he so loved, he yearned for something more—an adventure that linked the digital realm to the vibrant life outside.
 
-In a quiet village perched between rolling hills and murmuring brooks, there lived a cat named Nimbus. Nimbus wasn’t like the other cats. While her neighbors prowled in the moonlight for mice, Nimbus had her eyes set on higher pursuits—specifically, a strange, enchanting light that appeared each night atop the old clock tower at the center of the village.
+One crisp Monday morning, while sipping his steaming cup of coffee, Manoj stumbled upon an online competition called "Code for Good." The challenge aimed to develop software solutions for real-world problems, with prizes that included a chance to work with NGOs around the world. Without a second thought, he dove headfirst into the contest, his mind racing with ideas.
 
-Nimbus first noticed the light one blustery autumn evening. It twinkled through the mist, neither candle nor lantern, and pulsed with a color she couldn’t quite name. Curious, Nimbus crept from her cozy windowsill, leapt between rain-beaded roofs, and landed softly in the shadow of the clock tower.
+For weeks, Manoj worked tirelessly, poring over issues like climate change and education accessibility. He finally decided to create an app that facilitated skill-sharing amlessons in exchange for coding tutorials, for example.
 
-She climbed, nimble and brave, her paws finding purchase on weathered stones and iron drainpipes. The wind howled, trying to discourage her, but Nimbus pressed on. At last, she reached the highest window, tucked beneath the chimes and gears.
+As the deadline approached, Manoj often burned the midnight oil, fueled by the excitement of his vision. Late nights turned into early mornings filled with lessons in exchange for coding tutorials, for example.
 
-Inside, an ancient clockmaker dozed in a battered chair, a book open on his knees. But Nimbus barely spared him a glance—her gaze was captured by the light. It hovered in the air, warm and dancing, as if inviting her to play.
+As the deadline approached, Manoj often burned the midnight oil, fueled by the excitement of his vision. Late nights turned into early mornings filled with coding sprints and debugging sessions. He pushed through the challenges, infusing passion into every line of code. Finally, submission day arrived. Heart pounding, he hit “Send.”
 
-Nimbus gave a curious chirp. The light spun, dipping closer, and in a soft shimmer, it unfolded into a tiny, radiant moth. Nimbus watched, wide-eyed, as the moth flickered and wrote shapes in the air—fairy-tale symbols and maps, secrets only cats could truly understand.
+Weeks passed, and as he sat in his small apartment, anxiously refreshing emails, he received the news: his project had made the final cut! Excitement surged through him, but it also brought an overwhelming sense of responsibility. On stage, surrounded by fellow innovators, Manoj presented "SkillSwap." The judges were impressed, but he felt most moved by the reactions of the audience, who recognized the potential for real change.
 
-Each night after, Nimbus returned. The moth greeted her with new patterns, teaching her the stories of winds and stars, how rain moves over rivers, and where the fattest mice sleep when the world turns cold. Nimbus listened and learned, growing wise with quiet magic.
+In the coming months, Manoj was invited to collaborate with NGOs across India. He worked with rural communities, helping farmers use technology to learn about sustainable practices. He found joy in bringing people together, watching them teach one another, and forge connections that transcended age and background.
 
-She never chased the moth, not once. For some stories aren’t meant to be caught—only cherished, and shared. So Nimbus kept the moth’s secrets and, if you ever wander down to the village at dusk, you might just see a clever little cat watching the clock tower, eyes twinkling with stories waiting for the telling.
+One evening, at a community gathering facilitated by SkillSwap, an elderly farmer named Ramesh approached Manoj. With a warm smile, Ramesh shared how he had learned gardening techniques from a teacher in the nearby village and was now able to produce more food than ever. “You made this possible,” Ramesh said, playfully patting Manoj on the back. The engineer’s heart swelled with pride, but he quickly reminded himself, “It was the community that made it happen.”   
 
----
+Months later, during the final event of the competition, “SkillSwap” was recognized not just for its innovative design but for the real impact it had created in communities throughout India. Manoj stood on stage again, but this time, he was joined by many of the community members he had worked with. As they took center stage, it became clear that their stories of growth and connection were the true highlight—not just his coding skills.
 
-Would you like another story about Nimbus or a different kind of cat tale?
-    */
+Returning to his everyday life as an engineer, Manoj was forever changed. He learned that while technology had the power to connect us, it was the kindness of the human spirit that truly created transformation. No longer just focused on algorithms, he found purpose in collaboration and community.
+
+From that day forward, Manoj Nishad not only coded for client projects but also devoted himself to social initiatives, bridging gaps between technology and humanity. And in every line of code, he infused a bit of magic, reminding everyone that no software could bring people together quite like a shared smile or a helping hand.
+
+In the heart of Bangalore, he didn’t just become a software engineer; he became a changemaker, a storyteller of human connection, inspiring others to believe that the best projects in life are built together.
+
+  ● All event stream  
+*/
