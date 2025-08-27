@@ -92,5 +92,13 @@ And fixed "Error during browser automation: elementHandle.screenshot: Element is
 
 :::::👍 Now this code is updated to submit the form by clicking on the "Create Account" button::::::
 
+Problems:
+
+1. Not returning the output of the form submission (like success message, error message, etc) after submitting the form. This can be done by waiting for a specific element to appear on the page after form submission and then extracting its text content.
+ > How to resolve this? docs: https://playwright.dev/docs/api/class-locator#locator-wait-for
+
+2. I want to locate the authentication form automatically instead of hardcoding the form fields and button names.
+3. I want to handle different website structures and form designs dynamically. just like humans do. through searching for keywords like "sign up", "register", "create account", etc in the page content and then locating the form fields and buttons accordingly. and also handling different form field types like textboxes, dropdowns, checkboxes, etc. and navigating from one page to another if form is not found on the current page. and also handling captchas if present on the page.
+
 Resources: https://playwright.dev/docs/screenshots
 */
