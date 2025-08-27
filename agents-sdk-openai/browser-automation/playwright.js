@@ -15,15 +15,25 @@ const browserAutomation = async () => {
     const page = await browser.newPage();
 
     // Step 3: Navigate to a URL
-    await page.goto("https://ui.chaicode.com");
+    // await page.goto("https://ui.chaicode.com");
+    await page.goto("https://ui.chaicode.com/auth-sada/signup");
     console.log("Page title:", await page.title());
 
+    // Step 3.1: Find the form element
+    const form = await page.$("form");
+    if (form) {
+      console.log("Form found on the page");
+    } else {
+      console.log("Form not found on the page");
+    }
+
     // Step 4: Take a screenshot
-    await page.screenshot({ path: "screenshot.png" });
+    // await page.screenshot({ path: "screenshot.png" });
+    await form.screenshot({ path: "form-screenshot.png" });
     console.log("Screenshot taken and saved as screenshot.png");
 
     // Step 5: Convert screenshot to base64
-    const screenshotBuffer = await page.screenshot();
+    const screenshotBuffer = await form.screenshot();
     const screenshotBase64 = screenshotBuffer.toString("base64");
     console.log("Screenshot in base64 format:", screenshotBase64);
 
@@ -52,6 +62,11 @@ Disadvantages:
 1. In this code, we will take a screenshot of the whole page. But in real world scenarios, we might need to take screenshot of a specific element on the page. like a button, form, etc.
 
 2. Converting the whole screentshot to base64 (which can be a large image) and so this will give the error while sending it to the LLM as input due to the token limit. like 4k tokens for gpt-3.5-turbo and 8k tokens for gpt-4.
+
+Actual Process in Real World Scenarios:
+1. Instead of taking screenshot of the whole page, we will take screenshot of a specific element on the page using built-in locators in Playwright. like page.getByRole('button', { name: 'Submit' }).screenshot(). Docs: https://playwright.dev/docs/locators#locate-by-role
+
+::::::👍 Now this code is updated to take screenshot of a specific element on the page (a form in this case)::::::
 
 Resources: https://playwright.dev/docs/screenshots
 */
