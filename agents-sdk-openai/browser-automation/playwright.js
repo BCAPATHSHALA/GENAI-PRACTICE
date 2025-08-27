@@ -27,6 +27,12 @@ const browserAutomation = async () => {
       console.log("Form not found on the page");
     }
 
+    // Step 3.2: Fill the form fields using Playwright's fill() method (fullname, email, password)
+    await page.getByRole("textbox", { name: "Full Name" }).fill("Manoj Kumar");
+    await page.getByRole("textbox", { name: "Email" }).fill("manoj@gmail.com");
+    await page.getByRole("textbox", { name: "Password" }).fill("Manoj@123");
+    console.log("Form fields filled successfully");
+
     // Step 4: Take a screenshot
     // await page.screenshot({ path: "screenshot.png" });
     await form.screenshot({ path: "form-screenshot.png" });
@@ -67,6 +73,11 @@ Actual Process in Real World Scenarios:
 1. Instead of taking screenshot of the whole page, we will take screenshot of a specific element on the page using built-in locators in Playwright. like page.getByRole('button', { name: 'Submit' }).screenshot(). Docs: https://playwright.dev/docs/locators#locate-by-role
 
 ::::::👍 Now this code is updated to take screenshot of a specific element on the page (a form in this case)::::::
+
+2. Now we will fill the form fields using Playwright's fill() method. like page.getByRole('textbox', { name: 'Email' }).fill('manoj@gmail.com'). Docs: https://playwright.dev/docs/api/class-locator#locator-fill
+
+:::::👍 Now this code is updated to fill the form fields (fullname, email, password)::::::
+
 
 Resources: https://playwright.dev/docs/screenshots
 */
