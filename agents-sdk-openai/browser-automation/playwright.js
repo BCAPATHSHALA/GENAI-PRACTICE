@@ -20,7 +20,7 @@ const browserAutomation = async () => {
     console.log("Page title:", await page.title());
 
     // Step 3.1: Find the form element
-    const form = await page.$("form");
+    const form = page.locator("form");
     if (form) {
       console.log("Form found on the page");
     } else {
@@ -32,6 +32,12 @@ const browserAutomation = async () => {
     await page.getByRole("textbox", { name: "Email" }).fill("manoj@gmail.com");
     await page.getByRole("textbox", { name: "Password" }).fill("Manoj@123");
     console.log("Form fields filled successfully");
+
+    // Step 3.3: Take action/submit the form using Playwright's click() method
+    await page
+      .getByRole("button", { name: "Create Account" })
+      .click({ delay: 3000 });
+    console.log("Form submitted successfully");
 
     // Step 4: Take a screenshot
     // await page.screenshot({ path: "screenshot.png" });
@@ -78,6 +84,13 @@ Actual Process in Real World Scenarios:
 
 :::::👍 Now this code is updated to fill the form fields (fullname, email, password)::::::
 
+3. Now we will take action/submit the form using Playwright's click() method. like page.getByRole('button', { name: 'Submit' }).click(). Docs: https://playwright.dev/docs/api/class-locator#locator-click
+
+Now this code is updated to submit the form by clicking on the "Create Account" button. and also added the necessary waits internally by Playwright.
+
+And fixed "Error during browser automation: elementHandle.screenshot: Element is not attached to the DOM" through page.locator() instead of page.$().
+
+:::::👍 Now this code is updated to submit the form by clicking on the "Create Account" button::::::
 
 Resources: https://playwright.dev/docs/screenshots
 */
