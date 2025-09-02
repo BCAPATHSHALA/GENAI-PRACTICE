@@ -2,6 +2,7 @@ import "dotenv/config";
 import { Agent, run } from "@openai/agents";
 
 // this may actual database like postgresql, mongodb etc
+// https://openai.github.io/openai-agents-js/guides/running-agents/#conversations--chat-threads
 let database = [];
 
 const init = async (userQuery) => {
