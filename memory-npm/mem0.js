@@ -79,3 +79,5 @@ BOT:  You are Manoj, a MERN stack and generative AI developer from Agra, Uttar P
 Adding to memory...mem0ai
 Adding to memory...done
 */
+
+// https://github.com/mem0ai/mem0/blob/main/mem0/configs/prompts.py
