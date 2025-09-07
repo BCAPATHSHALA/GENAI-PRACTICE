@@ -9,8 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@openai/agents": "^0.1.0",
-    "@openai/agents-realtime": "^0.1.0",
+    "@openai/agents": "^0.0.17",
+    "@openai/agents-realtime": "^0.0.17",
     "@radix-ui/react-slot": "^1.2.3",
     "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
