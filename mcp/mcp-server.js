@@ -22,7 +22,9 @@ server.registerTool(
     },
   },
   async ({ num1, num2 }) => {
-    return { content: [{ type: "text", text: `${num1 + num2}` }] };
+    console.error(`Received request: addTwoNumbers(${num1}, ${num2})`);
+    const sum = num1 + num2;
+    return { content: [{ type: "text", text: `${sum}` }] };
   }
 );
 
@@ -30,6 +32,7 @@ server.registerTool(
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
+  console.error("MCP server connected, waiting for client requests...");
 }
 
 main().catch((error) => {

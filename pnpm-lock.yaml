@@ -8,9 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@anthropic-ai/sdk':
+        specifier: ^0.62.0
+        version: 0.62.0
       '@langchain/community':
         specifier: ^0.3.53
-        version: 0.3.53(df6a0397ebb44ec7369ae0968d54cfe9)
+        version: 0.3.53(5f597b82fa557c39a7b901a26811e35b)
       '@langchain/core':
         specifier: ^0.3.72
         version: 0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76))
@@ -43,7 +46,7 @@ importers:
         version: 17.2.1
       mem0ai:
         specifier: ^2.1.38
-        version: 2.1.38(@anthropic-ai/sdk@0.27.3(encoding@0.1.13))(@cloudflare/workers-types@4.20250904.0)(@google/genai@1.17.0(@modelcontextprotocol/sdk@1.18.0)(encoding@0.1.13))(@langchain/core@0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76)))(@mistralai/mistralai@1.10.0)(@supabase/supabase-js@2.57.0)(@types/jest@29.5.14)(@types/pg@8.11.0)(@types/sqlite3@3.1.11)(cloudflare@4.5.0(encoding@0.1.13))(encoding@0.1.13)(groq-sdk@0.3.0(encoding@0.1.13))(neo4j-driver@5.28.1)(ollama@0.5.17)(pg@8.11.3)(redis@4.7.1)(sqlite3@5.1.7)(ws@8.18.3)
+        version: 2.1.38(@anthropic-ai/sdk@0.62.0)(@cloudflare/workers-types@4.20250904.0)(@google/genai@1.17.0(@modelcontextprotocol/sdk@1.18.0)(encoding@0.1.13))(@langchain/core@0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76)))(@mistralai/mistralai@1.10.0)(@supabase/supabase-js@2.57.0)(@types/jest@29.5.14)(@types/pg@8.11.0)(@types/sqlite3@3.1.11)(cloudflare@4.5.0(encoding@0.1.13))(encoding@0.1.13)(groq-sdk@0.3.0(encoding@0.1.13))(neo4j-driver@5.28.1)(ollama@0.5.17)(pg@8.11.3)(redis@4.7.1)(sqlite3@5.1.7)(ws@8.18.3)
       openai:
         specifier: ^5.12.2
         version: 5.12.2(ws@8.18.3)(zod@3.25.76)
@@ -71,6 +74,10 @@ packages:
 
   '@anthropic-ai/sdk@0.27.3':
     resolution: {integrity: sha512-IjLt0gd3L4jlOfilxVXTifn42FnVffMgDC04RJK1KDZpmkBWLv0XC92MVVmkxrFZNS/7l3xWgP/I3nqtX1sQHw==}
+
+  '@anthropic-ai/sdk@0.62.0':
+    resolution: {integrity: sha512-gT2VFKX0gSp7KJNlav/vzRFjJOPYDZxCJRx7MYUc+fqURc5aS6OI/UJeD2KytJkjsIWv0OOwH1ePc1S5QE2GZw==}
+    hasBin: true
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -2646,6 +2653,8 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  '@anthropic-ai/sdk@0.62.0': {}
+
   '@babel/code-frame@7.27.1':
     dependencies:
       '@babel/helper-validator-identifier': 7.27.1
@@ -2744,7 +2753,7 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
-  '@langchain/community@0.3.53(df6a0397ebb44ec7369ae0968d54cfe9)':
+  '@langchain/community@0.3.53(5f597b82fa557c39a7b901a26811e35b)':
     dependencies:
       '@browserbasehq/stagehand': 1.14.0(@playwright/test@1.55.0)(deepmerge@4.3.1)(dotenv@17.2.1)(encoding@0.1.13)(openai@5.12.2(ws@8.18.3)(zod@3.25.76))(zod@3.25.76)
       '@ibm-cloud/watsonx-ai': 1.6.10
@@ -2767,7 +2776,7 @@ snapshots:
       cheerio: 1.1.2
       google-auth-library: 9.15.1(encoding@0.1.13)
       jsonwebtoken: 9.0.2
-      mem0ai: 2.1.38(@anthropic-ai/sdk@0.27.3(encoding@0.1.13))(@cloudflare/workers-types@4.20250904.0)(@google/genai@1.17.0(@modelcontextprotocol/sdk@1.18.0)(encoding@0.1.13))(@langchain/core@0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76)))(@mistralai/mistralai@1.10.0)(@supabase/supabase-js@2.57.0)(@types/jest@29.5.14)(@types/pg@8.11.0)(@types/sqlite3@3.1.11)(cloudflare@4.5.0(encoding@0.1.13))(encoding@0.1.13)(groq-sdk@0.3.0(encoding@0.1.13))(neo4j-driver@5.28.1)(ollama@0.5.17)(pg@8.11.3)(redis@4.7.1)(sqlite3@5.1.7)(ws@8.18.3)
+      mem0ai: 2.1.38(@anthropic-ai/sdk@0.62.0)(@cloudflare/workers-types@4.20250904.0)(@google/genai@1.17.0(@modelcontextprotocol/sdk@1.18.0)(encoding@0.1.13))(@langchain/core@0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76)))(@mistralai/mistralai@1.10.0)(@supabase/supabase-js@2.57.0)(@types/jest@29.5.14)(@types/pg@8.11.0)(@types/sqlite3@3.1.11)(cloudflare@4.5.0(encoding@0.1.13))(encoding@0.1.13)(groq-sdk@0.3.0(encoding@0.1.13))(neo4j-driver@5.28.1)(ollama@0.5.17)(pg@8.11.3)(redis@4.7.1)(sqlite3@5.1.7)(ws@8.18.3)
       neo4j-driver: 5.28.1
       pdf-parse: 1.1.1
       pg: 8.11.3
@@ -4223,9 +4232,9 @@ snapshots:
 
   media-typer@1.1.0: {}
 
-  mem0ai@2.1.38(@anthropic-ai/sdk@0.27.3(encoding@0.1.13))(@cloudflare/workers-types@4.20250904.0)(@google/genai@1.17.0(@modelcontextprotocol/sdk@1.18.0)(encoding@0.1.13))(@langchain/core@0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76)))(@mistralai/mistralai@1.10.0)(@supabase/supabase-js@2.57.0)(@types/jest@29.5.14)(@types/pg@8.11.0)(@types/sqlite3@3.1.11)(cloudflare@4.5.0(encoding@0.1.13))(encoding@0.1.13)(groq-sdk@0.3.0(encoding@0.1.13))(neo4j-driver@5.28.1)(ollama@0.5.17)(pg@8.11.3)(redis@4.7.1)(sqlite3@5.1.7)(ws@8.18.3):
+  mem0ai@2.1.38(@anthropic-ai/sdk@0.62.0)(@cloudflare/workers-types@4.20250904.0)(@google/genai@1.17.0(@modelcontextprotocol/sdk@1.18.0)(encoding@0.1.13))(@langchain/core@0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76)))(@mistralai/mistralai@1.10.0)(@supabase/supabase-js@2.57.0)(@types/jest@29.5.14)(@types/pg@8.11.0)(@types/sqlite3@3.1.11)(cloudflare@4.5.0(encoding@0.1.13))(encoding@0.1.13)(groq-sdk@0.3.0(encoding@0.1.13))(neo4j-driver@5.28.1)(ollama@0.5.17)(pg@8.11.3)(redis@4.7.1)(sqlite3@5.1.7)(ws@8.18.3):
     dependencies:
-      '@anthropic-ai/sdk': 0.27.3(encoding@0.1.13)
+      '@anthropic-ai/sdk': 0.62.0
       '@cloudflare/workers-types': 4.20250904.0
       '@google/genai': 1.17.0(@modelcontextprotocol/sdk@1.18.0)(encoding@0.1.13)
       '@langchain/core': 0.3.72(openai@5.12.2(ws@8.18.3)(zod@3.25.76))
