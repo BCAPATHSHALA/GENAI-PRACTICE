@@ -49,7 +49,9 @@ const TOOL_MAP = {
   getGithubUserInfoByUsername: getGithubUserInfoByUsername,
 };
 
-const client = new OpenAI();
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 async function main() {
   // Chain Of Thought Prompting
@@ -98,10 +100,9 @@ async function main() {
     },
     {
       role: "user",
-      // content: "what is the current weather of delhi?",
+      content: "what is the current weather of delhi?",
       // content: "create the folder name todoapp and create three files index.html, style.css, and script.js for building the todo application.",
-      content:
-        "In the current directly, read the changes via git and push the changes to github with good commit message",
+      // content: "In the current directly, read the changes via git and push the changes to github with good commit message",
       // content: "i want the get the public information of this username BCAPATHSHALA of github"
     },
   ];
